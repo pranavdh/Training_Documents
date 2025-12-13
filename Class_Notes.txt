@@ -1301,4 +1301,273 @@ Next :::
 	MLFlow 
 	
 	KubeFLow 
+
+
+
+#####################
+Day-5: 13th Dec. 2025
+#####################	
+
+	- Packaging the ML Project :::
 	
+	- Docker ->
+		
+	- Containerization :::
+		- Docker & DockerHub 
+		
+	- DVC => Version Control the ML Dataset 
+	
+	- AWS S3 Buckets ==> To Manage the ML Dataset ==> git & github  ===> DVC & AWS S3.
+	
+	- ML Project 
+		- Python -> Streamlit, Flask, Fast API		
+		
+	- github actions -> CI/CD Pipeline 
+	
+		- MLFlow 
+		
+	- End-to-End CICD MLOps Pipeline using github-actions  
+	
+	- AWS Sagemaker
+		
+		
+Containerization using Docker ::::	To Package the ML Model!
+
+	- Containerization ::::
+	
+		- Is a process of packaging the Application along with the dependencies.
+		
+	- Docker is Container Engine :
+		- Is to Create/Manage the Container Images and Containers
+		
+	Terminologies :::
+	
+		- Docker Engine :	Is to Create/Manage the Container Images and Containers
+		
+		- Container Images :	
+				- Is a static File, that define the dependencies to package the Application
+				- It is Non-Executable
+				- It composed of many Layer of Instruction
+				
+		- Container :
+				- Is an Executable unit of Container Images.
+		
+		- Container Registry :
+				- Used to Version the Container Images. 
+				- DockerHub*** / ECR / ACR / GCR 
+				- Create a DockerHub Account
+		
+		- Container Repository :
+				- Sub-set of Container Registry
+		
+		Dev Environment:		
+		
+			*.java 		
+					
+			github:						Artifactory Library			Container Registry
+											Jfrog						DockerHub 
+
+				*.java_V1.0		==> 	*.war_v1.0				==> 	mywebapp_img:v1.0
+				*.java_V1.1		==> 	*.war_v1.1              ==> 	mywebapp_img:v1.1
+				*.java_V1.2		==> 	*.war_v1.2              ==> 	mywebapp_img:v1.2
+				*.java_V1.3		==> 	*.war_v1.3              ==> 	mywebapp_img:v1.3
+				
+			DVC & AWS-S3/Azure Disk/G Volume
+			
+				==> Maintain the Version of ML Datasets.
+		
+	Virtual Machine :::
+	
+		- VMs are called as Hardware Level Virtualization
+		- VMs are created using Hypervisor
+		- VMs are used to Execute the Operating System 
+		- VMs will continue to execute, even if there no Active Task/Application.
+		- VMs consume more space and time to startup the Application
+	
+	Container :::	
+
+		- Containers are called as OS Level Virtualization
+		- Containers are created using Container Engine like Docker
+		- Containers are used to Execute the Task/Application. Not Operating System 
+		- Containers will go to EXIT State, if there no Active Task/Application.
+		- Containers consume less space and time to startup the Application	
+		
+		- Containers run in it's own dedicated/Isolated Address space.
+		
+		- Containers uses the properties of Underlying Operating System
+		
+			Kernel :
+				- Namespace 
+				- Control Group
+		
+	Work with Docker :::
+	
+		1. Explore DockerHub Images 
+		
+		2. Work with Container Images & Containers using Docker CLI Commands. 
+		
+		3. Create Container Images 
+		
+		4. Publish to Container Registry 
+		
+
+		- Create DockerHub Account 			# https://hub.docker.com/
+		
+		- Install Docker Engine on Build Environment
+		
+			- Use AWS EC2 instance - Create Ubuntu Machine 
+			
+			- Login to AWS EC2 Instance using SSH Agent 
+			
+			- Install Docker Engine
+		
+
+	- Access AWS Cloud Platform :::
+	
+	Access AWS Cloud ! 
+	
+		- Create AWS Free Tier Account !		
+		
+			# https://aws.amazon.com/console/
+			# https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-creating.html
+				
+			==> Active Email_ID 
+			==> Active Mobile Number 
+			==> Active Credit/Debit Card - Enabled with International Transactions 
+			
+	Upon Creating an Account :
+
+	Login to AWS Console:
+	
+		- Email_ID 			# AWS root user ID.
+		
+		- Login as a root user.
+	
+			- EMail_ID 
+			- Password 
+			
+	
+	- Launch an EC2 Instance - VM 
+	
+	
+	- Connect & Loginc to EC2 Instance :::
+	
+		- EC2 Instance Connect Option 		# Thru Web Browser 
+		
+		- SSH Agent 		# Windows users 
+			- MobaXterm 	# https://mobaxterm.mobatek.net/download-home-edition.html
+			- Putty 
+			
+		- Terminal			# Mac/Linux User
+		
+	
+	- Install Docker Engine & work with Docker cli commands :::
+	
+	
+	sudo -i 
+	
+	apt update -y 
+	
+	apt install docker.io -y 
+	
+	- Work with Docker Cli Commands :::
+
+	docker --version 
+	
+	docker images 		# To get list of Docker Images in the Local Machine
+	
+	docker ps			# To get the list of Active Containers 
+	
+	docker ps -a 		# To get the list of of Active & Inactive Container 
+	
+	Use DockerHub and working with existing Images :::
+	
+	docker pull <image_name>			# Download an Image from Container Registry
+	
+	docker pull <image_name>:<Version_No>
+	
+	docker run <image_name>				# Create Container & Execute
+	
+	Container Execution Modes :
+	
+		1. Foreground Mode/Attached Mode :			# Default Mode 
+		
+			- docker run ubuntu sleep 20 
+		
+		2. Background Mode/Detached Mode :
+
+			- docker run -d ubuntu sleep 20 
+			
+		3. Interactive Mode :
+		
+			- docker run -it ubuntu bash 
+			
+				- exit 					
+				
+	
+	docker start <Container_ID>
+	
+	docker exec -it <Container_ID> bash 			# Login to the Running Container
+	
+		- exit										# Just Log-off  		
+	
+	docker stop <Container_ID>
+	
+	
+	- Create an Application Images
+	
+	- Push that Image to Container Registry 
+	
+	- Pull to any target Machine and Create Container
+	
+	
+	How to Create a Container Image :::
+	
+	- Using Docker Build Command :
+		- Pre-Requisites : Dockerfile 
+	
+		Syntax :
+			docker build -t <Container_Repository_Name>/New_Image_Name:<v1.0> .	# "." denotes the Dockerfile ref.
+		
+		- docker build -t loksaieta/AppImg:v1.0 .
+	
+	- Create Dockerfile :::
+	
+		FROM ubuntu 
+		RUN apt update -y 
+		RUN apt install git -y 
+		RUN apt install nginx -y 
+		
+	
+	Dockerfile Instructions :
+	
+			FROM 									# To Identify the Base Image
+			RUN 									# To run the package manager
+			COPY 									# To Copy the file from host volume to container volume
+			CP 										# To Copy the file within the container volumes 
+			ADD 									# To Copy the file from Host Volume as well as from URL
+			ENV 									# To define the Environment Variable 
+			ARG 									# To pass Arguements to the Steps in Dockerfile 
+			EXPOSE									# To Define the Container Port 
+			WORKDIR									# To set the current working directory within the Container 
+			CMD										# To set the default start-up command to the container 
+													  This Command can be changed at run-time.
+			ENTRYPOINT								# To set the default start-up command to the container 
+													  This Command cannot be changed at run-time.	
+	
+	Docker Build :::
+
+
+Next :::
+	
+	Docker Push :::
+	
+		- To Publish the Image to Container Registry :::
+		
+		-> DockerHub Login User Name 
+		
+		-> DockerHub User's PAT - Access Token 
+		
+			- Create Access Token On DockerHub 
+		
+	- Port Mapping : Access the Container Application 
